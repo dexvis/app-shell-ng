@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Lib } from './lib';
+import { AppShell } from './app-shell';
 
-describe('Lib', () => {
-  let component: Lib;
-  let fixture: ComponentFixture<Lib>;
+describe('AppShell', () => {
+  let component: AppShell;
+  let fixture: ComponentFixture<AppShell>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Lib]
+      imports: [AppShell]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Lib);
+    fixture = TestBed.createComponent(AppShell);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

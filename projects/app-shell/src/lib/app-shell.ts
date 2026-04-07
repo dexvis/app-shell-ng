@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'lib-lib',
+  selector: 'lib-app-shell',
   imports: [],
   template: `
     <p>
-      lib works!
+      app-shell works!
     </p>
   `,
   styles: ``,
 })
-export class Lib {
+export class AppShell {
 
 }

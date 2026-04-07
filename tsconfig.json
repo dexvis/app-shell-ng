@@ -7,6 +7,9 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
+      "app-shell": [
+        "./dist/app-shell"
+      ],
       "lib": [
         "./dist/lib"
       ]
@@ -40,6 +43,12 @@
     },
     {
       "path": "./projects/lib/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/app-shell/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/app-shell/tsconfig.spec.json"
     }
   ]
 }
