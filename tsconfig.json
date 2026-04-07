@@ -10,9 +10,6 @@
       "app-shell": [
         "./dist/app-shell"
       ],
-      "lib": [
-        "./dist/lib"
-      ]
     },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -37,12 +34,6 @@
     },
     {
       "path": "./projects/shell-ng/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/lib/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/lib/tsconfig.spec.json"
     },
     {
       "path": "./projects/app-shell/tsconfig.lib.json"

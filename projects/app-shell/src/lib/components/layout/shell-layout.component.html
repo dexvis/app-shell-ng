@@ -1,0 +1,155 @@
+<div class="display-shell">
+  <mat-toolbar class="top-toolbar">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="logoMenu"
+      class="logo-button hide-mobile"
+      matTooltip="Menu"
+      aria-label="Open menu"
+    >
+      <span>Ap</span>
+    </button>
+
+    <mat-menu #logoMenu="matMenu">
+      <ng-container *ngFor="let item of navItems">
+        <button mat-menu-item *ngIf="!item.alwaysVisible" (click)="onNavItemClick(item)">
+          <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </ng-container>
+      <button mat-menu-item disabled>v{{ appVersion }}</button>
+    </mat-menu>
+
+    <button
+      mat-icon-button
+      class="hide-desktop"
+      (click)="toggleNavMenu()"
+      aria-label="Toggle navigation menu"
+    >
+      <mat-icon>{{ navOpen ? 'close' : 'menu' }}</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="hide-desktop"
+      (click)="toggleToolsMenu()"
+      aria-label="Toggle tools menu"
+    >
+      <mat-icon>{{ toolsOpen ? 'close' : 'tune' }}</mat-icon>
+    </button>
+
+    <div class="nav-items hide-mobile">
+      <ng-container *ngFor="let item of navItems">
+        <button
+          mat-button
+          *ngIf="item.alwaysVisible"
+          (click)="onNavItemClick(item)"
+          [attr.aria-label]="item.label"
+        >
+          <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+          <span>{{ item.label }}</span>
+        </button>
+      </ng-container>
+    </div>
+
+    <div class="middle-section hide-mobile">
+      <ng-content select="[header]"></ng-content>
+    </div>
+
+    <div class="mobile-header-section hide-desktop">
+      <ng-content select="[mobileHeader]"></ng-content>
+    </div>
+
+    <span class="flex-spacer"></span>
+
+    <button
+      mat-icon-button
+      class="hide-mobile"
+      (click)="toggleLeftPane()"
+      aria-label="Toggle left pane"
+    >
+      <mat-icon>{{ isLeftPaneVisible ? 'left_panel_close' : 'left_panel_open' }}</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="hide-mobile"
+      (click)="toggleRightPane()"
+      aria-label="Toggle right pane"
+    >
+      <mat-icon>{{ isRightPaneVisible ? 'right_panel_close' : 'right_panel_open' }}</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="mobile-menu nav-menu" [class.open]="navOpen">
+    <ng-container *ngFor="let item of navItems">
+      <button mat-button (click)="onNavItemClick(item)" [attr.aria-label]="item.label">
+        <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </button>
+    </ng-container>
+    <div class="version-item">v{{ appVersion }}</div>
+  </div>
+
+  <div class="mobile-menu tools-menu" [class.open]="toolsOpen">
+    <button mat-button (click)="toggleLeftPane()">
+      <mat-icon>{{ isLeftPaneVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+      <span>Left pane</span>
+    </button>
+
+    <button mat-button (click)="toggleRightPane()">
+      <mat-icon>{{ isRightPaneVisible ? 'visibility_off' : 'visibility' }}</mat-icon>
+      <span>Right pane</span>
+    </button>
+
+    <ng-content select="[mobileTools]"></ng-content>
+  </div>
+
+  <div class="main-content">
+    <div
+      *ngIf="isLeftPaneVisible"
+      class="pane left-pane"
+      [style.flex-basis.px]="leftPaneWidth"
+    >
+      <ng-content select="[leftPane]"></ng-content>
+    </div>
+
+    <div
+      *ngIf="isLeftPaneVisible"
+      class="divider left-divider"
+      (mousedown)="onMouseDownLeft($event)"
+    ></div>
+
+    <div class="central-pane">
+      <ng-content select="[centralPane]"></ng-content>
+    </div>
+
+    <div
+      *ngIf="isRightPaneVisible"
+      class="divider right-divider"
+      (mousedown)="onMouseDownRight($event)"
+    ></div>
+
+    <div
+      *ngIf="isRightPaneVisible"
+      class="pane right-pane"
+      [style.flex-basis.px]="rightPaneWidth"
+    >
+      <ng-content select="[rightPane]"></ng-content>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left">
+      <ng-content select="[footer-left]"></ng-content>
+    </div>
+
+    <div class="footer-center">
+      <ng-content select="[footer]"></ng-content>
+    </div>
+
+    <div class="footer-right">
+      <ng-content select="[footer-right]"></ng-content>
+    </div>
+  </div>
+</div>
