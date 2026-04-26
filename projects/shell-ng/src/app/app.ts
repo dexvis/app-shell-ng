@@ -1,14 +1,19 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ShellLayoutComponent } from 'app-shell';
+import { ShellLayoutComponent, ThemeToggleComponent } from 'app-shell';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ShellLayoutComponent],
+  imports: [ ShellLayoutComponent, ThemeToggleComponent, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('shell-ng');
+  leftOpen = signal(true);
+  rightOpen = signal(true);
+  leftWidth = signal(280);
+  rightWidth = signal(320);
 }

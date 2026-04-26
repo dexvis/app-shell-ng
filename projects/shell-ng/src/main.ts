@@ -1,6 +1,13 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
+import { provideShellTheme } from 'app-shell';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, {
+  providers: [
+    provideShellTheme({
+      storageKey: 'theme',
+      defaultMode: 'auto',
+    }),
+  ],
+}).catch(console.error);

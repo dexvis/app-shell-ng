@@ -1,27 +1,42 @@
-<app-shell-layout [isLeftPaneVisible]="true" [isRightPaneVisible]="true">
-  <div leftPane>
-    Left pane
+<app-shell-layout [(leftPaneVisible)]="leftOpen" [(rightPaneVisible)]="rightOpen">
+
+  <button logo mat-icon-button>
+    <mat-icon>local_fire_department</mat-icon>
+  </button>
+
+  <!-- Help / Display / Configure + tools -->
+  <nav header style="display: flex; gap: 4px; align-items: center;">
+<!--    <button mat-button><mat-icon>help</mat-icon> Help</button>-->
+<!--    <button mat-button><mat-icon>desktop_windows</mat-icon> Display</button>-->
+<!--    <button mat-button><mat-icon>tune</mat-icon> Configure</button>-->
+
+<!--    &lt;!&ndash; Tools group &ndash;&gt;-->
+<!--    <button mat-icon-button><mat-icon>account_tree</mat-icon></button>-->
+<!--    <button mat-icon-button><mat-icon>crop</mat-icon></button>-->
+<!--    <button mat-icon-button><mat-icon>download</mat-icon></button>-->
+<!--    <button mat-icon-button><mat-icon>center_focus_strong</mat-icon></button>-->
+<!--    <button mat-icon-button><mat-icon>info</mat-icon></button>-->
+  </nav>
+
+
+  <lib-theme-toggle header-right />
+
+  <div left-pane-header >
+    <button mat-icon-button><mat-icon>tips_and_updates</mat-icon></button>
+    <button mat-icon-button><mat-icon>refresh</mat-icon></button>
+  </div>
+  <div left-pane>
+
   </div>
 
-  <div centralPane>
-    Main content
+
+  <main central-pane>
+  </main>
+
+
+  <div right-pane>
   </div>
 
-  <div rightPane>
-    Right pane
-  </div>
 
-  <div footer-left>
-    Footer left
-  </div>
 
-  <div footer>
-    Footer center
-  </div>
-
-  <div footer-right>
-    Footer right
-  </div>
 </app-shell-layout>
-
-<router-outlet />

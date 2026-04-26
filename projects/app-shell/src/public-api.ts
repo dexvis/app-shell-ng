@@ -2,6 +2,5 @@
  * Public API Surface of app-shell
  */
 
-export * from './lib/app-shell';
-export * from './lib/components/layout/shell-layout.component';
-
+export * from './lib/layout/shell-layout/shell-layout.component';
+export * from './lib/theme';

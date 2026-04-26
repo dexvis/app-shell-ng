@@ -1,0 +1,167 @@
+<div class="display-shell">
+  <mat-toolbar class="top-toolbar">
+    <!-- ============= LEFT GROUP — fixed shell zone ============= -->
+
+    <!-- Logo zone — content via [logo] slot -->
+    <div class="logo-slot hide-mobile">
+      <ng-content select="[logo]"></ng-content>
+    </div>
+
+    <!-- Mobile tools trigger — replaces the desktop logo on small screens -->
+    <button
+      mat-icon-button
+      class="hide-desktop mobile-tools-trigger"
+      (click)="toggleToolsMenu()"
+      [attr.aria-label]="toolsOpen() ? 'Close tools menu' : 'Open tools menu'"
+      [matTooltip]="toolsOpen() ? 'Close tools' : 'Tools'"
+    >
+      <mat-icon>{{ toolsOpen() ? 'close' : 'tune' }}</mat-icon>
+    </button>
+
+    <!-- ============= USER HEADER SLOT (Help / Display / Configure / tools…) ============= -->
+    <button
+      mat-icon-button
+      class="hide-mobile pane-toggle-btn left-toggle"
+      (click)="toggleLeftPane()"
+      [attr.aria-label]="leftPaneVisible() ? 'Hide left panel' : 'Show left panel'"
+      [matTooltip]="leftPaneVisible() ? 'Hide left panel' : 'Show left panel'"
+    >
+      <mat-icon>{{ leftPaneVisible() ? 'left_panel_close' : 'left_panel_open' }}</mat-icon>
+    </button>
+
+    <div class="header-section hide-mobile">
+      <ng-content select="[header]"></ng-content>
+    </div>
+
+    <div class="mobile-header-section hide-desktop">
+      <ng-content select="[mobile-header]"></ng-content>
+    </div>
+
+    <!-- ============= LEFT PANE TOGGLE — shell-managed, sits right after user header ============= -->
+
+
+
+    <!-- ============= FLEXIBLE SPACER ============= -->
+
+    <span class="flex-spacer"></span>
+
+    <!-- ============= RIGHT GROUP — fixed shell zone ============= -->
+
+    <!-- Right-side user slot — for theme toggle, notifications, profile, etc. -->
+    <div class="header-right-slot hide-mobile">
+      <ng-content select="[header-right]"></ng-content>
+    </div>
+
+    <button
+      mat-icon-button
+      class="hide-mobile pane-toggle-btn right-toggle"
+      (click)="toggleRightPane()"
+      [attr.aria-label]="rightPaneVisible() ? 'Hide right panel' : 'Show right panel'"
+      [matTooltip]="rightPaneVisible() ? 'Hide right panel' : 'Show right panel'"
+    >
+      <mat-icon>{{ rightPaneVisible() ? 'right_panel_close' : 'right_panel_open' }}</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!-- ============= MOBILE DROPDOWN MENU ============= -->
+
+  <div class="mobile-menu tools-menu" [class.open]="toolsOpen()">
+    <button mat-button (click)="toggleLeftPane()">
+      <mat-icon>{{ leftPaneVisible() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      <span>Left panel</span>
+    </button>
+
+    <button mat-button (click)="toggleRightPane()">
+      <mat-icon>{{ rightPaneVisible() ? 'visibility_off' : 'visibility' }}</mat-icon>
+      <span>Right panel</span>
+    </button>
+
+    <ng-content select="[mobile-tools]"></ng-content>
+  </div>
+
+  <!-- ============= MAIN CONTENT ROW ============= -->
+
+  <div class="main-content">
+    @if (leftPaneVisible()) {
+      <div class="pane left-pane" [style.flex-basis.px]="leftPaneWidth()">
+        <div class="pane-header">
+          <div class="pane-header-content">
+            <ng-content select="[left-pane-header]"></ng-content>
+          </div>
+          <button
+            mat-icon-button
+            class="pane-close-btn"
+            (click)="toggleLeftPane()"
+            aria-label="Hide left panel"
+            matTooltip="Hide left panel"
+          >
+            <mat-icon>left_panel_close</mat-icon>
+          </button>
+        </div>
+
+        <div class="pane-body">
+          <ng-content select="[left-pane]"></ng-content>
+        </div>
+      </div>
+
+      <div
+        class="divider left-divider hide-mobile"
+        (mousedown)="onMouseDownLeft($event)"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize left panel"
+      ></div>
+    }
+
+    <div class="central-pane">
+      <ng-content select="[central-pane]"></ng-content>
+    </div>
+
+    @if (rightPaneVisible()) {
+      <div
+        class="divider right-divider hide-mobile"
+        (mousedown)="onMouseDownRight($event)"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label="Resize right panel"
+      ></div>
+
+      <div class="pane right-pane" [style.flex-basis.px]="rightPaneWidth()">
+        <div class="pane-header">
+          <button
+            mat-icon-button
+            class="pane-close-btn"
+            (click)="toggleRightPane()"
+            aria-label="Hide right panel"
+            matTooltip="Hide right panel"
+          >
+            <mat-icon>right_panel_close</mat-icon>
+          </button>
+          <div class="pane-header-content">
+            <ng-content select="[right-pane-header]"></ng-content>
+          </div>
+        </div>
+
+        <div class="pane-body">
+          <ng-content select="[right-pane]"></ng-content>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- ============= FOOTER ============= -->
+
+  <div class="footer">
+    <div class="footer-left">
+      <ng-content select="[footer-left]"></ng-content>
+    </div>
+
+    <div class="footer-center">
+      <ng-content select="[footer-center]"></ng-content>
+    </div>
+
+    <div class="footer-right">
+      <ng-content select="[footer-right]"></ng-content>
+    </div>
+  </div>
+</div>

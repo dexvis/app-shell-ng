@@ -1,0 +1,269 @@
+/* =====================================================================
+ * Shell Layout — component styles
+ *
+ * Principles:
+ *  - No global side effects: no `body`, no `*` selectors.
+ *  - Theming via Material 3 system tokens (var(--mat-sys-*)) so the
+ *    shell automatically follows the consumer app's light/dark theme.
+ *    Hardcoded fallbacks are provided for apps without Material theming.
+ *  - All styles scoped under :host.
+ * ===================================================================== */
+
+:host {
+  display: block;
+  height: 100%;
+  min-height: 100dvh;
+  box-sizing: border-box;
+
+  /* Local tokens with fallbacks — consumers can override these */
+  --shell-surface: var(--mat-sys-surface, #ffffff);
+  --shell-surface-variant: var(--mat-sys-surface-container, #f5f5f5);
+  --shell-on-surface: var(--mat-sys-on-surface, #111111);
+  --shell-outline: var(--mat-sys-outline-variant, #d0d0d0);
+  --shell-divider: var(--mat-sys-outline-variant, #d8d8d8);
+  --shell-divider-hover: var(--mat-sys-primary, #bdbdbd);
+
+  --shell-toolbar-height: 64px;
+  --shell-toolbar-height-mobile: 56px;
+  --shell-footer-min-height: 48px;
+  --shell-pane-header-height: 40px;
+  --shell-divider-width: 6px;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Root layout ---------- */
+
+.display-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: inherit;
+  background: var(--shell-surface-variant);
+  color: var(--shell-on-surface);
+}
+
+/* ---------- Toolbar ---------- */
+
+.top-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--shell-toolbar-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--shell-outline);
+  background: var(--shell-surface);
+}
+
+.logo-slot,
+.header-section,
+.mobile-header-section,
+.header-right-slot {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.logo-slot {
+  flex: 0 0 auto;
+}
+
+.header-section,
+.mobile-header-section {
+  flex: 0 1 auto;
+}
+
+.header-right-slot {
+  flex: 0 0 auto;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.pane-toggle-btn,
+.mobile-tools-trigger {
+  flex: 0 0 auto;
+}
+
+/* ---------- Mobile dropdown menu ---------- */
+
+.mobile-menu {
+  position: absolute;
+  top: var(--shell-toolbar-height-mobile);
+  left: 0;
+  right: 0;
+  z-index: 10;
+
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border-bottom: 1px solid var(--shell-outline);
+  background: var(--shell-surface);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  &.open {
+    display: flex;
+  }
+
+  button {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- Main content area ---------- */
+
+.main-content {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ---------- Panes ---------- */
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  background: var(--shell-surface-variant);
+  flex-shrink: 0;
+  overflow: hidden; /* pane-body owns the scroll */
+}
+
+.pane-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  min-height: var(--shell-pane-header-height);
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--shell-outline);
+  background: var(--shell-surface);
+}
+
+.pane-header-content {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.pane-close-btn {
+  flex: 0 0 auto;
+}
+
+.pane-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+}
+
+.central-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: auto;
+  background: var(--shell-surface);
+}
+
+/* ---------- Resizer divider ---------- */
+
+.divider {
+  position: relative;
+  flex: 0 0 var(--shell-divider-width);
+  background: var(--shell-divider);
+  cursor: col-resize;
+  user-select: none;
+  transition: background 0.15s ease;
+
+  /* Expanded hit area without visual change */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -3px;
+    right: -3px;
+  }
+
+  &:hover {
+    background: var(--shell-divider-hover);
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--shell-footer-min-height);
+  padding: 8px 12px;
+  border-top: 1px solid var(--shell-outline);
+  background: var(--shell-surface);
+}
+
+.footer-left {
+  justify-self: start;
+}
+
+.footer-center {
+  justify-self: center;
+}
+
+.footer-right {
+  justify-self: end;
+}
+
+/* ---------- Responsive: desktop / mobile visibility ---------- */
+
+.hide-desktop {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .hide-desktop {
+    display: inline-flex !important;
+  }
+
+  .top-toolbar {
+    min-height: var(--shell-toolbar-height-mobile);
+  }
+
+  /* On mobile, panes stack vertically and take full width */
+  .main-content {
+    flex-direction: column;
+  }
+
+  .pane {
+    flex-basis: auto !important;
+    min-width: 100%;
+    width: 100%;
+    max-height: 40vh;
+  }
+
+  /* Footer collapses to single column */
+  .footer {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .footer-center,
+  .footer-right {
+    justify-self: start;
+  }
+}
