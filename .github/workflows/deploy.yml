@@ -19,10 +19,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - run: npm ci
+
+      - run: npx ng build app-shell --configuration production
 
       - run: npx ng build shell-ng --configuration production --base-href "/app-shell-ng/"
 

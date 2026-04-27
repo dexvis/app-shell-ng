@@ -51,26 +51,6 @@ export class ShellLayoutComponent {
     this.rightPaneVisible.update((v) => !v);
   }
 
-  /** Show left pane explicitly. */
-  showLeftPane(): void {
-    this.leftPaneVisible.set(true);
-  }
-
-  /** Hide left pane explicitly. */
-  hideLeftPane(): void {
-    this.leftPaneVisible.set(false);
-  }
-
-  /** Show right pane explicitly. */
-  showRightPane(): void {
-    this.rightPaneVisible.set(true);
-  }
-
-  /** Hide right pane explicitly. */
-  hideRightPane(): void {
-    this.rightPaneVisible.set(false);
-  }
-
   // ===== Internal state =====
 
   protected readonly toolsOpen = signal(false);

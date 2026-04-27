@@ -18,7 +18,8 @@
       <mat-icon>{{ toolsOpen() ? 'close' : 'tune' }}</mat-icon>
     </button>
 
-    <!-- ============= USER HEADER SLOT (Help / Display / Configure / tools…) ============= -->
+
+    <!-- ============= LEFT PANE TOGGLE — shell-managed, sits right before user header ============= -->
     <button
       mat-icon-button
       class="hide-mobile pane-toggle-btn left-toggle"
@@ -29,6 +30,7 @@
       <mat-icon>{{ leftPaneVisible() ? 'left_panel_close' : 'left_panel_open' }}</mat-icon>
     </button>
 
+    <!-- ============= USER HEADER SLOT (Help / Display / Configure / tools…) ============= -->
     <div class="header-section hide-mobile">
       <ng-content select="[header]"></ng-content>
     </div>
@@ -36,9 +38,6 @@
     <div class="mobile-header-section hide-desktop">
       <ng-content select="[mobile-header]"></ng-content>
     </div>
-
-    <!-- ============= LEFT PANE TOGGLE — shell-managed, sits right after user header ============= -->
-
 
 
     <!-- ============= FLEXIBLE SPACER ============= -->
