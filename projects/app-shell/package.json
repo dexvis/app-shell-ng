@@ -1,12 +1,23 @@
 {
-  "name": "app-shell",
+  "name": "@dexvis/shell",
   "version": "0.0.1",
+  "description": "Reusable Angular shell layout (header, panes, footer) and theme service for the DexVis project.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dexvis/app-shell-ng.git"
+  },
   "peerDependencies": {
     "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0"
+    "@angular/core": "^21.0.0",
+    "@angular/material": "^21.0.0",
+    "@angular/cdk": "^21.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }

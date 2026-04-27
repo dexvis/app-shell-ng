@@ -1,59 +1,54 @@
-# 
+# DexVis Shell
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+[![npm](https://img.shields.io/npm/v/@dexvis/shell.svg)](https://www.npmjs.com/package/@dexvis/shell)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Development server
+Reusable Angular shell layout. The library is published as [`@dexvis/shell`](https://www.npmjs.com/package/@dexvis/shell).
 
-To start a local development server, run:
+**Live demo:** [https://dexvis.github.io/app-shell-ng/](https://dexvis.github.io/app-shell-ng/)
 
-```bash
-ng serve
+## Structure
+
+```
+projects/
+├── app-shell/    ← library (published as @dexvis/shell)
+└── shell-ng/     ← demo app (deployed to GitHub Pages)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Develop
 
 ```bash
-ng generate component component-name
+npm ci
+npx ng build app-shell --watch     # terminal 1
+npx ng serve shell-ng              # terminal 2
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Open [http://localhost:4200](http://localhost:4200).
+
+## Build
 
 ```bash
-ng generate --help
+npx ng build app-shell --configuration production
+npx ng build shell-ng --configuration production
 ```
 
-## Building
-
-To build the project run:
+## Publish
 
 ```bash
-ng build
+cd projects/app-shell
+npm version patch                            # or minor / major
+cd ../..
+npx ng build app-shell --configuration production
+cd dist/dexvis/shell
+npm publish
+cd ../../..
+git push --follow-tags
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Library docs
 
-## Running unit tests
+See [`projects/app-shell/README.md`](./projects/app-shell/README.md).
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## License
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT

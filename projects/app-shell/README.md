@@ -1,63 +1,105 @@
-# AppShell
+# DexVis Shell
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.0.
+[![npm](https://img.shields.io/npm/v/@dexvis/shell.svg)](https://www.npmjs.com/package/@dexvis/shell)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Code scaffolding
+Reusable Angular shell layout — header, resizable side panels, central area, and footer slots. Includes a theme service and toggle button for light/dark mode.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+[Live demo](https://dexvis.github.io/app-shell-ng/) · [Source](https://github.com/dexvis/app-shell-ng)
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Install
 
 ```bash
-ng generate --help
+npm install @dexvis/shell @angular/material @angular/cdk
 ```
 
-## Building
+Requires Angular 21+.
 
-To build the library, run:
+## Setup
 
-```bash
-ng build app-shell
+In your `styles.scss`:
+
+```scss
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (theme-type: color-scheme, primary: mat.$azure-palette),
+    typography: Roboto,
+  ));
+}
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+`theme-type: color-scheme` is required for dark mode to work.
 
-### Publishing the Library
+## Usage
 
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/app-shell
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```ts
+import { ShellLayoutComponent, ThemeToggleComponent } from '@dexvis/shell';
 ```
 
-## Running end-to-end tests
+```html
+<app-shell-layout>
+  <button logo mat-icon-button><mat-icon>apps</mat-icon></button>
 
-For end-to-end (e2e) testing, run:
+  <nav header>
+    <button mat-button>Help</button>
+    <button mat-button>Settings</button>
+  </nav>
 
-```bash
-ng e2e
+  <lib-theme-toggle header-right />
+
+  <aside left-pane>Side content</aside>
+  <main central-pane>Main content</main>
+  <aside right-pane>Inspector</aside>
+
+  <span footer-left>Status</span>
+  <span footer-right>v1.0</span>
+</app-shell-layout>
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## API
 
-## Additional Resources
+### `<app-shell-layout>`
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Two-way bindable inputs (all optional):
+
+| Input | Type | Default |
+|-------|------|---------|
+| `leftPaneVisible` / `rightPaneVisible` | `boolean` | `false` |
+| `leftPaneWidth` / `rightPaneWidth` | `number` (px) | `250` |
+
+Slots: `logo`, `header`, `header-right`, `mobile-header`, `left-pane`, `left-pane-header`, `central-pane`, `right-pane`, `right-pane-header`, `footer-left`, `footer-center`, `footer-right`.
+
+Public methods (via `#shell="shellLayout"`): `toggleLeftPane()`, `toggleRightPane()`.
+
+### `<lib-theme-toggle>`
+
+Drop-in button that switches the color scheme. Use `mode="cycle"` to cycle through light → dark → auto.
+
+### `ThemeService`
+
+Inject and use signals: `mode()`, `isDark()`. Methods: `setMode()`, `toggle()`, `cycle()`.
+
+### `provideShellTheme(config)`
+
+Optional configuration in `bootstrapApplication`:
+
+```ts
+provideShellTheme({ storageKey: 'my-app-theme', defaultMode: 'auto' });
+```
+
+## Customization
+
+Override CSS custom properties to adjust dimensions:
+
+```scss
+app-shell-layout {
+  --shell-toolbar-height: 72px;
+  --shell-divider-width: 8px;
+}
+```
+
+## License
+
+MIT
