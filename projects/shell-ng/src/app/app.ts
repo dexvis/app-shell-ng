@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ShellLayoutComponent, ThemeToggleComponent } from '@dexvis/shell';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
   standalone: true,
   imports: [ ShellLayoutComponent, ThemeToggleComponent, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './app.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss'
 })
 export class App {
