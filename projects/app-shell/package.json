@@ -1,6 +1,6 @@
 {
   "name": "@dexvis/shell",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Reusable Angular shell layout (header, panes, footer) and theme service for the DexVis project.",
   "license": "MIT",
   "repository": {
